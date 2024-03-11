@@ -5,5 +5,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  sql:
+    init:
+      mode: always
+  datasource:
+    data: classpath:/sample-data/ingredients.sql
   banner:
     location: classpath:/static/banner-dev.txt
