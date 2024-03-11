@@ -1,3 +1,6 @@
 spring:
+  config:
+    activate:
+      on-profile: default
   banner:
-    location: classpath:/static/banner.txt
+    location: classpath:/static/banner-prod.txt
