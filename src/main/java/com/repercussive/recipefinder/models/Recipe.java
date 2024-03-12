@@ -2,6 +2,8 @@ package com.repercussive.recipefinder.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.dao.DataIntegrityViolationException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_id_seq")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @ManyToMany
@@ -34,4 +36,12 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<IngredientQuantity> ingredientQuantities = new ArrayList<>();
+
+    @PrePersist
+    @PreUpdate
+    private void validateName() {
+        if (name == null || name.isEmpty()) {
+            throw new DataIntegrityViolationException("Recipe name cannot be null or empty");
+        }
+    }
 }

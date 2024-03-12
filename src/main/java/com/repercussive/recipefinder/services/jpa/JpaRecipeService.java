@@ -5,6 +5,8 @@ import com.repercussive.recipefinder.repositories.RecipeRepository;
 import com.repercussive.recipefinder.services.RecipeService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class JpaRecipeService implements RecipeService {
 
@@ -17,5 +19,10 @@ public class JpaRecipeService implements RecipeService {
     @Override
     public Recipe setRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
+    }
+
+    @Override
+    public Optional<Recipe> findByName(String name) {
+        return recipeRepository.findByNameIgnoreCase(name);
     }
 }
