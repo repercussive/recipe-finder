@@ -1,16 +1,19 @@
 package com.repercussive.recipefinder.config;
 
-import com.repercussive.recipefinder.models.Ingredient;
+import com.repercussive.recipefinder.mappers.IngredientMapper;
+import com.repercussive.recipefinder.mappers.RecipeMapper;
 import com.repercussive.recipefinder.repositories.IngredientRepository;
+import com.repercussive.recipefinder.repositories.RecipeRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.function.Function;
 
 @Component
 @Profile("dev")
@@ -18,30 +21,70 @@ public class DevStartupDatabasePopulator {
     private ObjectMapper jsonMapper;
 
     private final IngredientRepository ingredientRepository;
+    private final RecipeRepository recipeRepository;
+    private final IngredientMapper ingredientMapper;
+    private final RecipeMapper recipeMapper;
 
-    public DevStartupDatabasePopulator(IngredientRepository ingredientRepository) {
+    public DevStartupDatabasePopulator(
+            IngredientRepository ingredientRepository,
+            RecipeRepository recipeRepository,
+            IngredientMapper ingredientMapper,
+            RecipeMapper recipeMapper
+    ) {
         this.ingredientRepository = ingredientRepository;
+        this.recipeRepository = recipeRepository;
+        this.ingredientMapper = ingredientMapper;
+        this.recipeMapper = recipeMapper;
     }
 
     @PostConstruct
     public void runOnStartup() {
         jsonMapper = new ObjectMapper();
+        clearDatabase();
 
         try {
-            populateIngredients();
+            populateDbFromJsonFile(
+                    "/sample-data/ingredients.json",
+                    ingredientMapper::ingredientDtoToIngredient,
+                    ingredientRepository,
+                    new TypeReference<>() {
+                    }
+            );
+            populateDbFromJsonFile(
+                    "/sample-data/recipes.json",
+                    recipeMapper::recipeDtoToRecipe,
+                    recipeRepository,
+                    new TypeReference<>() {
+                    }
+            );
         } catch (IOException e) {
             System.out.println("Error reading data json file: " + e.getMessage());
         }
     }
 
-    private void populateIngredients() throws IOException {
-        System.out.println("[Populating ingredients table]");
+    private void clearDatabase() {
+        System.out.println("[Clearing database]");
+        recipeRepository.deleteAll();
         ingredientRepository.deleteAll();
-        TypeReference<List<Ingredient>> typeReference = new TypeReference<>(){};
-        try (InputStream inputStream = TypeReference.class.getResourceAsStream("/sample-data/ingredients.json")) {
-            List<Ingredient> ingredients = jsonMapper.readValue(inputStream, typeReference);
-            for (Ingredient ingredient : ingredients) {
-                ingredientRepository.save(ingredient);
+    }
+
+    private <TDto, TEntity> void populateDbFromJsonFile(
+            String dataFilePath,
+            Function<TDto, TEntity> dtoToEntityMapper,
+            CrudRepository<TEntity, Long> repository,
+            TypeReference<List<TDto>> dtoListTypeRef
+    ) throws IOException {
+
+        try (InputStream inputStream = TypeReference.class.getResourceAsStream(dataFilePath)) {
+            List<TDto> dtos = jsonMapper.readValue(inputStream, dtoListTypeRef);
+            for (TDto dto : dtos) {
+                try {
+                    TEntity entity = dtoToEntityMapper.apply(dto);
+                    repository.save(entity);
+                }
+                catch (Exception e) {
+                    System.out.println(dto.getClass());
+                }
             }
         }
     }

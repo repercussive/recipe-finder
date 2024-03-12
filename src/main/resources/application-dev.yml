@@ -4,11 +4,6 @@ spring:
       on-profile: dev
   jpa:
     hibernate:
-      ddl-auto: update
-  sql:
-    init:
-      mode: always
-  datasource:
-    data: classpath:/sample-data/ingredients.sql
+      ddl-auto: create
   banner:
     location: classpath:/static/banner-dev.txt

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Recipe Name 1",
+    "ingredientQuantities": [
+      {
+        "ingredient":  { "name":  "brown onion" },
+        "quantityPerPortion": 1,
+        "quantityUnitName": "Unit"
+      },
+      {
+        "ingredient":  { "name":  "tomato" },
+        "quantityPerPortion": 1,
+        "quantityUnitName": "Unit"
+      },
+      {
+        "ingredient":  { "name":  "red pepper" },
+        "quantityPerPortion": 1,
+        "quantityUnitName": "Unit"
+      }
+    ]
+  }
+]
