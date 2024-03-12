@@ -2,6 +2,7 @@ package com.repercussive.recipefinder.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @Data
 @AllArgsConstructor
@@ -17,4 +18,13 @@ public class Ingredient {
 
     @Column(unique = true, nullable = false, length = 100)
     private String name;
+
+    @PrePersist
+    @PreUpdate
+    private void normalizeName() {
+        if (name == null || name.isEmpty()) {
+            throw new DataIntegrityViolationException("Ingredient name cannot be null or empty");
+        }
+        name = name.toLowerCase();
+    }
 }
