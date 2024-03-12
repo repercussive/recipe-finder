@@ -15,18 +15,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class IngredientServiceIntegrationTests {
     private final IntegrationTestUtils testUtils;
-    private final IngredientService testIngredientService;
+    private final IngredientService ingredientServiceUnderTest;
 
     @Autowired
-    public IngredientServiceIntegrationTests(IntegrationTestUtils testUtils, IngredientService testIngredientService) {
+    public IngredientServiceIntegrationTests(IntegrationTestUtils testUtils, IngredientService ingredientService) {
         this.testUtils = testUtils;
-        this.testIngredientService = testIngredientService;
+        this.ingredientServiceUnderTest = ingredientService;
     }
 
     @Test
     public void testThatCreatingIngredientNormalizesName() {
         testUtils.createTestIngredient("NoOdLeS");
-        Optional<Ingredient> result = testIngredientService.findByName("noodles");
+        Optional<Ingredient> result = ingredientServiceUnderTest.findByName("noodles");
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("noodles");
     }
@@ -37,9 +37,9 @@ public class IngredientServiceIntegrationTests {
         testUtils.createTestIngredient("banana");
         testUtils.createTestIngredient("cherries");
 
-        Optional<Ingredient> apple = testIngredientService.findByName("apple");
-        Optional<Ingredient> banana = testIngredientService.findByName("banana");
-        Optional<Ingredient> cherries = testIngredientService.findByName("cherries");
+        Optional<Ingredient> apple = ingredientServiceUnderTest.findByName("apple");
+        Optional<Ingredient> banana = ingredientServiceUnderTest.findByName("banana");
+        Optional<Ingredient> cherries = ingredientServiceUnderTest.findByName("cherries");
 
         assertThat(apple).isPresent();
         assertThat(apple.get().getId()).isEqualTo(1);
@@ -56,7 +56,7 @@ public class IngredientServiceIntegrationTests {
         Ingredient ingredient = Ingredient.builder().name(null).build();
         assertThrows(
                 DataIntegrityViolationException.class,
-                () -> testIngredientService.setIngredient(ingredient)
+                () -> ingredientServiceUnderTest.setIngredient(ingredient)
         );
     }
 
@@ -65,7 +65,7 @@ public class IngredientServiceIntegrationTests {
         Ingredient ingredient = Ingredient.builder().name("").build();
         assertThrows(
                 DataIntegrityViolationException.class,
-                () -> testIngredientService.setIngredient(ingredient)
+                () -> ingredientServiceUnderTest.setIngredient(ingredient)
         );
     }
 
@@ -75,14 +75,14 @@ public class IngredientServiceIntegrationTests {
         Ingredient duplicateIngredient = Ingredient.builder().name("apple").build();
         assertThrows(
                 DataIntegrityViolationException.class,
-                () -> testIngredientService.setIngredient(duplicateIngredient)
+                () -> ingredientServiceUnderTest.setIngredient(duplicateIngredient)
         );
     }
 
     @Test
     public void testThatIngredientCanBeFoundByName() {
         testUtils.createTestIngredient("tomato");
-        Optional<Ingredient> result = testIngredientService.findByName("tomato");
+        Optional<Ingredient> result = ingredientServiceUnderTest.findByName("tomato");
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("tomato");
     }
@@ -90,7 +90,7 @@ public class IngredientServiceIntegrationTests {
     @Test
     public void testThatFindingAnIngredientIgnoresCase() {
         testUtils.createTestIngredient("peanuts");
-        Optional<Ingredient> result = testIngredientService.findByName("PeAnUts");
+        Optional<Ingredient> result = ingredientServiceUnderTest.findByName("PeAnUts");
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("peanuts");
     }
@@ -98,7 +98,7 @@ public class IngredientServiceIntegrationTests {
     @Test
     public void testThatIngredientCanBeFoundById() {
         testUtils.createTestIngredient("lettuce");
-        Optional<Ingredient> result = testIngredientService.findById(1L);
+        Optional<Ingredient> result = ingredientServiceUnderTest.findById(1L);
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("lettuce");
         assertThat(result.get().getId()).isEqualTo(1);
@@ -106,17 +106,17 @@ public class IngredientServiceIntegrationTests {
 
     @Test
     public void testThatFindingNonExistentIngredientReturnsEmptyOptional() {
-        Optional<Ingredient> result = testIngredientService.findByName("nonexistent");
+        Optional<Ingredient> result = ingredientServiceUnderTest.findByName("nonexistent");
         assertThat(result).isNotPresent();
     }
 
     @Test
-    public void testThatIngredientCanBeUpdated() {
+    public void testThatIngredientCanBeRenamed() {
         Ingredient ingredient = testUtils.createTestIngredient("onion");
         ingredient.setName("brown onion");
-        testIngredientService.setIngredient(ingredient);
+        ingredientServiceUnderTest.setIngredient(ingredient);
 
-        Optional<Ingredient> result = testIngredientService.findByName("brown onion");
+        Optional<Ingredient> result = ingredientServiceUnderTest.findByName("brown onion");
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("brown onion");
         assertThat(result.get().getId()).isEqualTo(ingredient.getId());
@@ -125,8 +125,8 @@ public class IngredientServiceIntegrationTests {
     @Test
     public void testThatIngredientCanBeDeleted() {
         Ingredient ingredient = testUtils.createTestIngredient("mushroom");
-        testIngredientService.deleteIngredient(ingredient.getId());
-        Optional<Ingredient> result = testIngredientService.findByName("mushroom");
+        ingredientServiceUnderTest.deleteIngredient(ingredient.getId());
+        Optional<Ingredient> result = ingredientServiceUnderTest.findByName("mushroom");
         assertThat(result).isNotPresent();
     }
 }
