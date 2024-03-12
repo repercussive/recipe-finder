@@ -15,7 +15,7 @@ public class JpaRecipeService implements RecipeService {
     }
 
     @Override
-    public Recipe createRecipe(Recipe recipe) {
+    public Recipe setRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
     }
 }

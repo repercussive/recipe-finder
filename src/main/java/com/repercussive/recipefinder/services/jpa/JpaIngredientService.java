@@ -15,7 +15,7 @@ public class JpaIngredientService implements IngredientService {
     }
 
     @Override
-    public Ingredient createIngredient(Ingredient ingredient) {
+    public Ingredient setIngredient(Ingredient ingredient) {
         return ingredientRepository.save(ingredient);
     }
 
@@ -26,6 +26,16 @@ public class JpaIngredientService implements IngredientService {
 
     @Override
     public Optional<Ingredient> findByName(String name) {
-        return ingredientRepository.findByName(name);
+        return ingredientRepository.findByNameIgnoreCase(name);
+    }
+
+    @Override
+    public void deleteIngredient(Long id) {
+        ingredientRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteIngredient(String name) {
+        ingredientRepository.deleteByName(name);
     }
 }

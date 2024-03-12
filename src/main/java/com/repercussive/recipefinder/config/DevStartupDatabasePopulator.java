@@ -54,14 +54,14 @@ public class DevStartupDatabasePopulator {
             populateDbFromJsonFile(
                     "/sample-data/ingredients.json",
                     ingredientMapper::ingredientDtoToIngredient,
-                    ingredientService::createIngredient,
+                    ingredientService::setIngredient,
                     new TypeReference<>() {
                     }
             );
             populateDbFromJsonFile(
                     "/sample-data/recipes.json",
                     recipeMapper::recipeDtoToRecipe,
-                    recipeService::createRecipe,
+                    recipeService::setRecipe,
                     new TypeReference<>() {
                     }
             );
