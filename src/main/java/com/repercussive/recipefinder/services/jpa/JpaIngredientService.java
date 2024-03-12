@@ -15,6 +15,11 @@ public class JpaIngredientService implements IngredientService {
     }
 
     @Override
+    public Ingredient createIngredient(Ingredient ingredient) {
+        return ingredientRepository.save(ingredient);
+    }
+
+    @Override
     public Optional<Ingredient> findById(Long id) {
         return ingredientRepository.findById(id);
     }

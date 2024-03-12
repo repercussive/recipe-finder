@@ -4,15 +4,17 @@ import com.repercussive.recipefinder.mappers.IngredientMapper;
 import com.repercussive.recipefinder.mappers.RecipeMapper;
 import com.repercussive.recipefinder.repositories.IngredientRepository;
 import com.repercussive.recipefinder.repositories.RecipeRepository;
+import com.repercussive.recipefinder.services.IngredientService;
+import com.repercussive.recipefinder.services.RecipeService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 @Component
@@ -20,17 +22,23 @@ import java.util.function.Function;
 public class DevStartupDatabasePopulator {
     private ObjectMapper jsonMapper;
 
+    private final IngredientService ingredientService;
+    private final RecipeService recipeService;
     private final IngredientRepository ingredientRepository;
     private final RecipeRepository recipeRepository;
     private final IngredientMapper ingredientMapper;
     private final RecipeMapper recipeMapper;
 
     public DevStartupDatabasePopulator(
+            IngredientService ingredientService,
+            RecipeService recipeService,
             IngredientRepository ingredientRepository,
             RecipeRepository recipeRepository,
             IngredientMapper ingredientMapper,
             RecipeMapper recipeMapper
     ) {
+        this.ingredientService = ingredientService;
+        this.recipeService = recipeService;
         this.ingredientRepository = ingredientRepository;
         this.recipeRepository = recipeRepository;
         this.ingredientMapper = ingredientMapper;
@@ -46,14 +54,14 @@ public class DevStartupDatabasePopulator {
             populateDbFromJsonFile(
                     "/sample-data/ingredients.json",
                     ingredientMapper::ingredientDtoToIngredient,
-                    ingredientRepository,
+                    ingredientService::createIngredient,
                     new TypeReference<>() {
                     }
             );
             populateDbFromJsonFile(
                     "/sample-data/recipes.json",
                     recipeMapper::recipeDtoToRecipe,
-                    recipeRepository,
+                    recipeService::createRecipe,
                     new TypeReference<>() {
                     }
             );
@@ -71,7 +79,7 @@ public class DevStartupDatabasePopulator {
     private <TDto, TEntity> void populateDbFromJsonFile(
             String dataFilePath,
             Function<TDto, TEntity> dtoToEntityMapper,
-            CrudRepository<TEntity, Long> repository,
+            Consumer<TEntity> createEntityFunction,
             TypeReference<List<TDto>> dtoListTypeRef
     ) throws IOException {
 
@@ -80,7 +88,7 @@ public class DevStartupDatabasePopulator {
             for (TDto dto : dtos) {
                 try {
                     TEntity entity = dtoToEntityMapper.apply(dto);
-                    repository.save(entity);
+                    createEntityFunction.accept(entity);
                 }
                 catch (Exception e) {
                     System.out.println(dto.getClass());
