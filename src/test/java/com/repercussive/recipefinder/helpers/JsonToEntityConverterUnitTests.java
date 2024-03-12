@@ -3,7 +3,6 @@ package com.repercussive.recipefinder.helpers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.repercussive.recipefinder.mappers.IngredientMapper;
-import com.repercussive.recipefinder.mappers.RecipeMapper;
 import com.repercussive.recipefinder.models.Ingredient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,7 @@ public class JsonToEntityConverterUnitTests {
     @Autowired
     public JsonToEntityConverterUnitTests(
             JsonToEntityConverter jsonToEntityConverter,
-            IngredientMapper ingredientMapper,
-            RecipeMapper recipeMapper
+            IngredientMapper ingredientMapper
     ) {
         this.jsonToEntityConverter = jsonToEntityConverter;
         this.ingredientMapper = ingredientMapper;
@@ -42,7 +40,7 @@ public class JsonToEntityConverterUnitTests {
     }
 
     @Test
-    public void testThatListOfIngredientsJsonIsConvertedToListOfIngredientEntity() throws IOException {
+    public void testThatListOfIngredientsJsonIsConvertedToListOfIngredientEntities() throws IOException {
         String json = "[{\"name\":\"apple\"},{\"name\":\"banana\"}]";
         List<Ingredient> ingredients = jsonToEntityConverter.jsonToEntityList(
                 json,
