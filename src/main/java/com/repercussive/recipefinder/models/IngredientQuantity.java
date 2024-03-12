@@ -21,7 +21,7 @@ public class IngredientQuantity {
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
-    @Column(name = "quantity_per_portion", nullable = false)
+    @Column(name = "quantity_per_portion")
     private Double quantityPerPortion;
 
     @Column(name = "quantity_unit_name")
