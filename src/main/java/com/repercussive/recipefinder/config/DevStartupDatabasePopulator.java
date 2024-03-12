@@ -86,13 +86,8 @@ public class DevStartupDatabasePopulator {
         try (InputStream inputStream = TypeReference.class.getResourceAsStream(dataFilePath)) {
             List<TDto> dtos = jsonMapper.readValue(inputStream, dtoListTypeRef);
             for (TDto dto : dtos) {
-                try {
-                    TEntity entity = dtoToEntityMapper.apply(dto);
-                    createEntityFunction.accept(entity);
-                }
-                catch (Exception e) {
-                    System.out.println(dto.getClass());
-                }
+                TEntity entity = dtoToEntityMapper.apply(dto);
+                createEntityFunction.accept(entity);
             }
         }
     }
