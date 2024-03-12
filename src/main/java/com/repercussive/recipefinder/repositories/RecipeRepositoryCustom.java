@@ -1,15 +1,10 @@
-package com.repercussive.recipefinder.services;
+package com.repercussive.recipefinder.repositories;
 
 import com.repercussive.recipefinder.models.Ingredient;
 import com.repercussive.recipefinder.models.Recipe;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface RecipeService {
-    Recipe setRecipe(Recipe recipe);
-
-    Optional<Recipe> findByName(String name);
-
+public interface RecipeRepositoryCustom {
     List<Recipe> findBestMatchingRecipes(List<Ingredient> ingredients, int pageNumber, int pageSize);
 }
