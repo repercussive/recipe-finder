@@ -1,21 +1,471 @@
 [
   {
-    "name": "Recipe Name 1",
+    "name": "One-pot lentil dal",
     "ingredientQuantities": [
       {
-        "ingredient":  { "name":  "brown onion" },
+        "ingredient": {
+          "name": "coconut oil"
+        },
         "quantityPerPortion": 1,
-        "quantityUnitName": "Unit"
+        "quantityUnitName": "tsp"
       },
       {
-        "ingredient":  { "name":  "tomato" },
-        "quantityPerPortion": 1,
-        "quantityUnitName": "Unit"
+        "ingredient": {
+          "name": "brown onion"
+        },
+        "quantityPerPortion": 0.5
       },
       {
-        "ingredient":  { "name":  "red pepper" },
+        "ingredient": {
+          "name": "garlic clove"
+        },
+        "quantityPerPortion": 1
+      },
+      {
+        "ingredient": {
+          "name": "ginger"
+        },
+        "quantityUnitName": "piece"
+      },
+      {
+        "ingredient": {
+          "name": "red pepper flakes"
+        },
+        "quantityPerPortion": 0.125,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "ground cumin"
+        },
+        "quantityPerPortion": 0.125,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "garam masala"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "ground coriander"
+        },
+        "quantityPerPortion": 0.125,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "ground turmeric"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "dried red lentils"
+        },
+        "quantityPerPortion": 50,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "chopped tomatoes"
+        },
+        "quantityPerPortion": 100,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "coconut milk"
+        },
+        "quantityPerPortion": 100,
+        "quantityUnitName": "ml"
+      },
+      {
+        "ingredient": {
+          "name": "vegetable stock"
+        },
+        "quantityPerPortion": 125,
+        "quantityUnitName": "ml"
+      },
+      {
+        "ingredient": {
+          "name": "salt"
+        }
+      },
+      {
+        "ingredient": {
+          "name": "black pepper"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Mexican-style pulled chicken & fiery feta corn",
+    "ingredientQuantities": [
+      {
+        "ingredient": {
+          "name": "ground cumin"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "ground coriander"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "smoked paprika"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "chicken breast"
+        },
+        "quantityPerPortion": 125,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "coriander"
+        },
+        "quantityPerPortion": 2.5,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "lime"
+        },
+        "quantityPerPortion": 0.5
+      },
+      {
+        "ingredient": {
+          "name": "sweetcorn"
+        },
+        "quantityPerPortion": 75,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "long-grain rice"
+        },
+        "quantityPerPortion": 65,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "tomato paste"
+        },
+        "quantityPerPortion": 8,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "mayonnaise"
+        },
+        "quantityPerPortion": 25,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "feta"
+        },
+        "quantityPerPortion": 15,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "red pepper flakes"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "salt"
+        }
+      },
+      {
+        "ingredient": {
+          "name": "black pepper"
+        }
+      },
+      {
+        "ingredient": {
+          "name": "vegetable oil"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Pad Thai",
+    "ingredientQuantities": [
+      {
+        "ingredient": {
+          "name": "rice noodles"
+        },
+        "quantityPerPortion": 55,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "olive oil"
+        },
+        "quantityPerPortion": 2,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "garlic clove"
+        },
+        "quantityPerPortion": 1
+      },
+      {
+        "ingredient": {
+          "name": "chicken breast"
+        },
+        "quantityPerPortion": 125,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "egg"
+        },
+        "quantityPerPortion": 0.5
+      },
+      {
+        "ingredient": {
+          "name": "bean sprouts"
+        },
+        "quantityPerPortion": 25,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "red pepper"
+        },
+        "quantityPerPortion": 0.5
+      },
+      {
+        "ingredient": {
+          "name": "spring onion"
+        },
+        "quantityPerPortion": 2
+      },
+      {
+        "ingredient": {
+          "name": "peanuts"
+        },
+        "quantityPerPortion": 20,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "lime"
+        },
+        "quantityPerPortion": 0.5
+      },
+      {
+        "ingredient": {
+          "name": "fish sauce"
+        },
+        "quantityPerPortion": 0.75,
+        "quantityUnitName": "tbsp"
+      },
+      {
+        "ingredient": {
+          "name": "soy sauce"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tbsp"
+      },
+      {
+        "ingredient": {
+          "name": "honey"
+        },
         "quantityPerPortion": 1,
-        "quantityUnitName": "Unit"
+        "quantityUnitName": "tbsp"
+      },
+      {
+        "ingredient": {
+          "name": "rice vinegar"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tbsp"
+      },
+      {
+        "ingredient": {
+          "name": "sriracha"
+        },
+        "quantityPerPortion": 0.25,
+        "quantityUnitName": "tbsp"
+      },
+      {
+        "ingredient": {
+          "name": "peanut butter"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tbsp"
+      }
+    ]
+  },
+  {
+    "name": "Shakshuka",
+    "ingredientQuantities": [
+      {
+        "ingredient": {
+          "name": "olive oil"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tbsp"
+      },
+      {
+        "ingredient": {
+          "name": "brown onion"
+        },
+        "quantityPerPortion": 0.5
+      },
+      {
+        "ingredient": {
+          "name": "red pepper"
+        },
+        "quantityPerPortion": 0.25
+      },
+      {
+        "ingredient": {
+          "name": "garlic clove"
+        },
+        "quantityPerPortion": 1
+      },
+      {
+        "ingredient": {
+          "name": "tomato paste"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tbsp"
+      },
+      {
+        "ingredient": {
+          "name": "ground cumin"
+        },
+        "quantityPerPortion": 0.25,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "smoked paprika"
+        },
+        "quantityPerPortion": 0.25,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "red pepper flakes"
+        },
+        "quantityPerPortion": 0.0625,
+        "quantityUnitName": "tsp"
+      },
+      {
+        "ingredient": {
+          "name": "chopped tomatoes"
+        },
+        "quantityPerPortion": 200,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "coriander"
+        },
+        "quantityPerPortion": 5,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "egg"
+        },
+        "quantityPerPortion": 2
+      },
+      {
+        "ingredient": {
+          "name": "feta"
+        },
+        "quantityPerPortion": 15,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "salt"
+        }
+      },
+      {
+        "ingredient": {
+          "name": "black pepper"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Sweetcorn and feta fritters",
+    "ingredientQuantities": [
+      {
+        "ingredient": {
+          "name": "sweetcorn"
+        },
+        "quantityPerPortion": 170,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "red chilli"
+        },
+        "quantityPerPortion": 0.5
+      },
+      {
+        "ingredient": {
+          "name": "spring onion"
+        },
+        "quantityPerPortion": 2
+      },
+      {
+        "ingredient": {
+          "name": "feta"
+        },
+        "quantityPerPortion": 40,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "self-raising flour"
+        },
+        "quantityPerPortion": 40,
+        "quantityUnitName": "g"
+      },
+      {
+        "ingredient": {
+          "name": "egg"
+        },
+        "quantityPerPortion": 0.5
+      },
+      {
+        "ingredient": {
+          "name": "coconut oil"
+        },
+        "quantityPerPortion": 0.5,
+        "quantityUnitName": "tbsp"
+      },
+      {
+        "ingredient": {
+          "name": "avocado"
+        },
+        "quantityPerPortion": 0.5
       }
     ]
   }
