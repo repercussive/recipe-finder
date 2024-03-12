@@ -1,5 +1,6 @@
 package com.repercussive.recipefinder.services;
 
+import com.repercussive.recipefinder.IntegrationTestUtils;
 import com.repercussive.recipefinder.models.Ingredient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class IngredientServiceIntegrationTests {
-
+    private final IntegrationTestUtils testUtils;
     private final IngredientService testIngredientService;
 
     @Autowired
-    public IngredientServiceIntegrationTests(IngredientService testIngredientService) {
+    public IngredientServiceIntegrationTests(IntegrationTestUtils testUtils, IngredientService testIngredientService) {
+        this.testUtils = testUtils;
         this.testIngredientService = testIngredientService;
-    }
-
-    private Ingredient createTestIngredient(String ingredientName) {
-        Ingredient ingredient = Ingredient.builder().name(ingredientName).build();
-        return testIngredientService.setIngredient(ingredient);
     }
 
     @Test
     public void testThatCreatingIngredientNormalizesName() {
-        createTestIngredient("NoOdLeS");
+        testUtils.createTestIngredient("NoOdLeS");
         Optional<Ingredient> result = testIngredientService.findByName("noodles");
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("noodles");
@@ -36,9 +33,9 @@ public class IngredientServiceIntegrationTests {
 
     @Test
     public void testThatCreatingIngredientsAutoAssignsId() {
-        createTestIngredient("apple");
-        createTestIngredient("banana");
-        createTestIngredient("cherries");
+        testUtils.createTestIngredient("apple");
+        testUtils.createTestIngredient("banana");
+        testUtils.createTestIngredient("cherries");
 
         Optional<Ingredient> apple = testIngredientService.findByName("apple");
         Optional<Ingredient> banana = testIngredientService.findByName("banana");
@@ -74,7 +71,7 @@ public class IngredientServiceIntegrationTests {
 
     @Test
     public void testThatDuplicateIngredientsCannotBeCreated() {
-        createTestIngredient("apple");
+        testUtils.createTestIngredient("apple");
         Ingredient duplicateIngredient = Ingredient.builder().name("apple").build();
         assertThrows(
                 DataIntegrityViolationException.class,
@@ -84,7 +81,7 @@ public class IngredientServiceIntegrationTests {
 
     @Test
     public void testThatIngredientCanBeFoundByName() {
-        createTestIngredient("tomato");
+        testUtils.createTestIngredient("tomato");
         Optional<Ingredient> result = testIngredientService.findByName("tomato");
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("tomato");
@@ -92,7 +89,7 @@ public class IngredientServiceIntegrationTests {
 
     @Test
     public void testThatFindingAnIngredientIgnoresCase() {
-        createTestIngredient("peanuts");
+        testUtils.createTestIngredient("peanuts");
         Optional<Ingredient> result = testIngredientService.findByName("PeAnUts");
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("peanuts");
@@ -100,7 +97,7 @@ public class IngredientServiceIntegrationTests {
 
     @Test
     public void testThatIngredientCanBeFoundById() {
-        createTestIngredient("lettuce");
+        testUtils.createTestIngredient("lettuce");
         Optional<Ingredient> result = testIngredientService.findById(1L);
         assertThat(result).isPresent();
         assertThat(result.get().getName()).isEqualTo("lettuce");
@@ -115,7 +112,7 @@ public class IngredientServiceIntegrationTests {
 
     @Test
     public void testThatIngredientCanBeUpdated() {
-        Ingredient ingredient = createTestIngredient("onion");
+        Ingredient ingredient = testUtils.createTestIngredient("onion");
         ingredient.setName("brown onion");
         testIngredientService.setIngredient(ingredient);
 
@@ -127,7 +124,7 @@ public class IngredientServiceIntegrationTests {
 
     @Test
     public void testThatIngredientCanBeDeleted() {
-        Ingredient ingredient = createTestIngredient("mushroom");
+        Ingredient ingredient = testUtils.createTestIngredient("mushroom");
         testIngredientService.deleteIngredient(ingredient.getId());
         Optional<Ingredient> result = testIngredientService.findByName("mushroom");
         assertThat(result).isNotPresent();
