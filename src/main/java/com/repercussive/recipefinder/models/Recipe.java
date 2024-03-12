@@ -1,14 +1,13 @@
 package com.repercussive.recipefinder.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.Set;
+import lombok.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
+@EqualsAndHashCode(exclude = { "ingredients", "ingredientQuantities" })
+@ToString(exclude = { "ingredients", "ingredientQuantities" })
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,6 +19,7 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recipe_id_seq")
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany
@@ -28,5 +28,10 @@ public class Recipe {
         joinColumns = @JoinColumn(name = "recipe.id"),
         inverseJoinColumns = @JoinColumn(name = "ingredient.id")
     )
-    private Set<Ingredient> ingredients;
+    @Builder.Default
+    private List<Ingredient> ingredients = new ArrayList<>();
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<IngredientQuantity> ingredientQuantities = new ArrayList<>();
 }
