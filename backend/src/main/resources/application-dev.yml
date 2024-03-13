@@ -7,3 +7,6 @@ spring:
       ddl-auto: create
   banner:
     location: classpath:/static/banner-dev.txt
+  docker:
+    compose:
+      file: ../compose.yaml

@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: default
+  banner:
+    location: classpath:/static/banner-prod.txt
+  docker:
+    compose:
+      file: ../compose.yaml
