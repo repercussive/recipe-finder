@@ -6,7 +6,8 @@ import org.springframework.cache.annotation.Cacheable;
 import java.util.Optional;
 
 public interface IngredientService {
-    Ingredient setIngredient(Ingredient ingredient);
+    @Cacheable("ingredients")
+    Iterable<Ingredient> findAll();
 
     @Cacheable("ingredients")
     Optional<Ingredient> findById(Long id);
@@ -15,7 +16,7 @@ public interface IngredientService {
 
     Optional<Ingredient> findByName(String name);
 
-    void deleteIngredient(Long id);
+    Ingredient setIngredient(Ingredient ingredient);
 
-    void deleteIngredient(String name);
+    void deleteIngredient(Long id);
 }
