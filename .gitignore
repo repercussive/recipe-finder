@@ -3,6 +3,8 @@
 *.iml
 *.ipr
 
+**/*.env
+
 target/
 
 .vscode/

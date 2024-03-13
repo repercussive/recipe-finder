@@ -4,6 +4,11 @@ spring:
       on-profile: default
   banner:
     location: classpath:/static/banner-prod.txt
+  datasource:
+    url: jdbc:postgresql://db:5432/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
   docker:
     compose:
-      file: ../compose.yaml
+      enabled: false
