@@ -16,6 +16,8 @@ public abstract class RecipeMapper {
     @Autowired
     private IngredientService ingredientService;
 
+    public abstract RecipeDto recipeToRecipeDto(Recipe recipe);
+
     public Recipe recipeDtoToRecipe(RecipeDto recipeDto) {
         Recipe recipe = Recipe.builder()
                 .id(recipeDto.getId())

@@ -67,10 +67,25 @@ public class IntegrationTestUtils {
     public SimpleRecipesData populateDbWithSimpleData() {
         Ingredient apple = createTestIngredient("apple");
         Ingredient banana = createTestIngredient("banana");
+        Recipe fruitSalad = createTestRecipe(
+                "Fruit Salad",
+                List.of(apple, banana),
+                List.of(
+                        IngredientQuantity.builder().ingredient(apple).quantityPerPortion(1.0).build(),
+                        IngredientQuantity.builder().ingredient(banana).quantityPerPortion(1.0).build()
+                )
+        );
+
         Ingredient carrot = createTestIngredient("carrot");
         Ingredient tomato = createTestIngredient("tomato");
-        Recipe fruitSalad = createTestRecipe("Fruit Salad", List.of(apple, banana));
-        Recipe vegetableMedley = createTestRecipe("Vegetable Medley", List.of(carrot, tomato));
+        Recipe vegetableMedley = createTestRecipe(
+                "Vegetable Medley",
+                List.of(carrot, tomato),
+                List.of(
+                        IngredientQuantity.builder().ingredient(carrot).quantityPerPortion(1.0).build(),
+                        IngredientQuantity.builder().ingredient(tomato).quantityPerPortion(1.0).build()
+                )
+        );
         return new SimpleRecipesData(apple, banana, carrot, tomato, fruitSalad, vegetableMedley);
     }
 

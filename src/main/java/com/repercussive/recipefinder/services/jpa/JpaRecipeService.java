@@ -19,8 +19,8 @@ public class JpaRecipeService implements RecipeService {
     }
 
     @Override
-    public Recipe setRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
+    public Optional<Recipe> findById(Long id) {
+        return recipeRepository.findById(id);
     }
 
     @Override
@@ -31,5 +31,10 @@ public class JpaRecipeService implements RecipeService {
     @Override
     public List<Recipe> findBestMatchingRecipes(List<Ingredient> ingredients, int pageNumber, int pageSize) {
         return recipeRepository.findBestMatchingRecipes(ingredients, pageNumber, pageSize);
+    }
+
+    @Override
+    public Recipe setRecipe(Recipe recipe) {
+        return recipeRepository.save(recipe);
     }
 }

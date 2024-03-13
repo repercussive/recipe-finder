@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RecipeService {
-    Recipe setRecipe(Recipe recipe);
+    Optional<Recipe> findById(Long id);
 
     Optional<Recipe> findByName(String name);
 
     List<Recipe> findBestMatchingRecipes(List<Ingredient> ingredients, int pageNumber, int pageSize);
+
+    Recipe setRecipe(Recipe recipe);
 }
