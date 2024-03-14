@@ -1,0 +1,38 @@
+:root {
+  font-family: sans-serif;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #509de9;
+}
+a:hover {
+  color: #97cbff;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #3e87d1;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
