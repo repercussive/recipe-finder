@@ -1,3 +1,4 @@
+import Spacer from '@src/components/Spacer'
 import { BACKEND_API_BASE_URL } from '@src/config/constants'
 import { useRecipeSearch } from '@src/context/RecipeSearchContext'
 import { fetchJson } from '@src/helpers/fetchJson'
@@ -38,6 +39,7 @@ const RecipePage: React.FC = () => {
   return (
     <>
       <h2>{recipe.name}</h2>
+      <Spacer mb="1rem" />
       <h3>Ingredients</h3>
       <ul>
         {recipe.ingredientQuantities.map((ingredientQuantity) => (
