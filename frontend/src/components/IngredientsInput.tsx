@@ -36,7 +36,12 @@ const IngredientsInput: React.FC = () => {
         theme={themeConfig}
       />
       <Spacer mb="0.5rem" />
-      <button onClick={handleFindRecipes}>Find recipes</button>
+      <button
+        onClick={handleFindRecipes}
+        disabled={selectedIngredients.length === 0}
+      >
+        Find recipes
+      </button>
     </>
   )
 }
