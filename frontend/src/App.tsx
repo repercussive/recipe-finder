@@ -1,8 +1,13 @@
+import IngredientsInput from './components/IngredientsInput'
+import { IngredientsProvider } from './context/IngredientsContext'
+
 function App() {
   return (
     <>
-      <h1>Hello, world!</h1>
-      <a href="">hello</a>
+      <h1>RecipeFinder</h1>
+      <IngredientsProvider>
+        <IngredientsInput />
+      </IngredientsProvider>
     </>
   )
 }
