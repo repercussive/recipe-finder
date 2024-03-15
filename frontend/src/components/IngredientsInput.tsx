@@ -1,17 +1,25 @@
 import { useIngredients } from '@context/IngredientsContext'
+import Spacer from '@src/components/Spacer'
+import { useRecipeSearch } from '@src/context/RecipeSearchContext'
 import { Ingredient } from '@src/types/Ingredient'
 import { useMemo, useState } from 'react'
 import Select, { MultiValue, ThemeConfig } from 'react-select'
 
 type SelectOption = { value: number, label: string }
 
-function IngredientsInput() {
+const IngredientsInput: React.FC = () => {
   const { ingredients, loadIngredients } = useIngredients()
+  const { findSuggestedRecipes } = useRecipeSearch()
   const [selectedIngredients, setSelectedIngredients] = useState<MultiValue<SelectOption>>([])
   const options = useMemo(() => mapIngredientsToOptions(ingredients), [ingredients])
 
   const handleChange = (newValue: MultiValue<SelectOption>) => {
     setSelectedIngredients(newValue)
+  }
+
+  const handleFindRecipes = () => {
+    const ingredientIds = selectedIngredients.map((ingredient) => ingredient.value)
+    findSuggestedRecipes(ingredientIds, 1)
   }
 
   return (
@@ -23,11 +31,12 @@ function IngredientsInput() {
         value={selectedIngredients}
         onChange={handleChange}
         onMenuOpen={loadIngredients}
-        placeholder={"Search for ingredients"}
+        placeholder="Search for ingredients"
         noOptionsMessage={() => ingredients.length > 0 ? "No matches found" : "Loading ingredients..."}
         theme={themeConfig}
       />
-      <p>We'll suggest recipe ideas for you.</p>
+      <Spacer mb="0.5rem" />
+      <button onClick={handleFindRecipes}>Find recipes</button>
     </>
   )
 }

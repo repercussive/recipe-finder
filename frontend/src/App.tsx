@@ -1,14 +1,16 @@
-import { IngredientsProvider } from '@context/IngredientsContext'
+import { AppProvider } from '@src/context/AppContext'
 import IngredientsInput from '@components/IngredientsInput'
+import SuggestedRecipesList from '@src/components/SuggestedRecipesList'
 
 function App() {
   return (
     <>
       <h1>RecipeFinder</h1>
       <main>
-        <IngredientsProvider>
+        <AppProvider>
           <IngredientsInput />
-        </IngredientsProvider>
+          <SuggestedRecipesList />
+        </AppProvider>
       </main>
     </>
   )

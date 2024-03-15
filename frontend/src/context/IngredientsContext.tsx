@@ -1,6 +1,7 @@
 import React, { createContext, useState, useCallback, useContext } from 'react'
 import { Ingredient } from '@customTypes/Ingredient'
 import { BACKEND_API_BASE_URL } from '@config/constants'
+import { fetchJson } from '@src/helpers/fetchJson'
 
 interface IngredientsContextValue {
   loadIngredients: () => void
@@ -16,17 +17,9 @@ export const IngredientsProvider: React.FC<React.PropsWithChildren> = ({ childre
 
   const loadIngredients = useCallback(async () => {
     if (ingredients.length > 0) return
-    try {  
-      const response = await fetch(`${BACKEND_API_BASE_URL}/ingredients`)
-      if (response.ok) {
-        const data = await response.json()
-        setIngredients(data)
-      } else {
-        console.error('Failed to load ingredients')
-      }
-    } catch (error) {
-      console.error('Failed to load ingredients', error)
-    }
+    const url = `${BACKEND_API_BASE_URL}/ingredients`
+    const responseData = await fetchJson<Ingredient[]>(url)
+    setIngredients(responseData)
   }, [ingredients])
 
   return (
