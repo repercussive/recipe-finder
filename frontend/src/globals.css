@@ -1,8 +1,9 @@
 :root {
+  --color-text: rgba(255, 255, 255, 0.87);
+  --color-bg: #242424;
+  --color-bg-secondary: #464646;
   font-family: sans-serif;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,12 +23,22 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+main {
+  width: min(calc(100vw - 5px), 500px);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --color-text: #213547;
+    --color-bg: #ffffff;
+    --color-bg-secondary: #e8e8e8;
   }
   a:hover {
     color: #3e87d1;

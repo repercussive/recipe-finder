@@ -5,9 +5,11 @@ function App() {
   return (
     <>
       <h1>RecipeFinder</h1>
-      <IngredientsProvider>
-        <IngredientsInput />
-      </IngredientsProvider>
+      <main>
+        <IngredientsProvider>
+          <IngredientsInput />
+        </IngredientsProvider>
+      </main>
     </>
   )
 }
