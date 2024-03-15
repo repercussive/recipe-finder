@@ -1,4 +1,5 @@
 import { useRecipeSearch } from '@src/context/RecipeSearchContext'
+import { Link } from 'wouter'
 
 const SuggestedRecipesList: React.FC = () => {
   const { recipeResults } = useRecipeSearch()
@@ -11,7 +12,9 @@ const SuggestedRecipesList: React.FC = () => {
       {recipeResults.length === 0 && <p>No suitable recipes found.</p>}
       <ul>
         {recipeResults.map((recipe) => (
-          <li key={recipe.id}>{recipe.name}</li>
+          <li key={recipe.id}>
+            <Link href={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+          </li>
         ))}
       </ul>
     </div>

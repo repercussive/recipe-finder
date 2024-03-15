@@ -1,6 +1,7 @@
 import { AppProvider } from '@src/context/AppContext'
-import IngredientsInput from '@components/IngredientsInput'
-import SuggestedRecipesList from '@src/components/SuggestedRecipesList'
+import { Route, Switch } from 'wouter'
+import FindRecipesPage from '@src/pages/FindRecipesPage'
+import RecipePage from '@src/pages/RecipePage'
 
 function App() {
   return (
@@ -8,8 +9,19 @@ function App() {
       <h1>RecipeFinder</h1>
       <main>
         <AppProvider>
-          <IngredientsInput />
-          <SuggestedRecipesList />
+          <Switch>
+            <Route path="/">
+              <FindRecipesPage />
+            </Route>
+
+            <Route path="/recipes/:id">
+              <RecipePage />
+            </Route>
+
+            <Route>
+              <h1>404 Not found</h1>
+            </Route>
+          </Switch>
         </AppProvider>
       </main>
     </>
