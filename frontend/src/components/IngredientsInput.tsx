@@ -1,4 +1,4 @@
-import { useIngredients } from '../context/IngredientsContext'
+import { useIngredients } from '@context/IngredientsContext'
 
 function IngredientsInput() {
   const { ingredients, loadIngredients } = useIngredients()

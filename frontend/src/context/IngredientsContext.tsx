@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect, useCallback, useContext } from 'react'
-import { Ingredient } from '../types/Ingredient'
-import { BACKEND_API_BASE_URL } from '../components/config/constants'
+import React, { createContext, useState, useCallback, useContext } from 'react'
+import { Ingredient } from '@customTypes/Ingredient'
+import { BACKEND_API_BASE_URL } from '@config/constants'
 
 interface IngredientsContextValue {
   loadIngredients: () => void
