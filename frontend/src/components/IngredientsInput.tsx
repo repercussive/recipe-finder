@@ -1,11 +1,18 @@
 import { useIngredients } from '@context/IngredientsContext'
 import { Ingredient } from '@src/types/Ingredient'
-import { useMemo } from 'react'
-import Select, { ThemeConfig } from 'react-select'
+import { useMemo, useState } from 'react'
+import Select, { MultiValue, ThemeConfig } from 'react-select'
+
+type SelectOption = { value: number, label: string }
 
 function IngredientsInput() {
   const { ingredients, loadIngredients } = useIngredients()
+  const [selectedIngredients, setSelectedIngredients] = useState<MultiValue<SelectOption>>([])
   const options = useMemo(() => mapIngredientsToOptions(ingredients), [ingredients])
+
+  const handleChange = (newValue: MultiValue<SelectOption>) => {
+    setSelectedIngredients(newValue)
+  }
 
   return (
     <>
@@ -13,9 +20,11 @@ function IngredientsInput() {
       <Select
         options={options}
         isMulti={true}
+        value={selectedIngredients}
+        onChange={handleChange}
         onMenuOpen={loadIngredients}
         placeholder={"Search for ingredients"}
-        noOptionsMessage={() => "Loading ingredients..."}
+        noOptionsMessage={() => ingredients.length > 0 ? "No matches found" : "Loading ingredients..."}
         theme={themeConfig}
       />
       <p>We'll suggest recipe ideas for you.</p>
@@ -23,7 +32,7 @@ function IngredientsInput() {
   )
 }
 
-function mapIngredientsToOptions(ingredients: Ingredient[]) {
+function mapIngredientsToOptions(ingredients: Ingredient[]): MultiValue<SelectOption> {
   return ingredients
     .sort((a, b) => a.name > b.name ? 1 : -1)
     .map((ingredient) => ({
