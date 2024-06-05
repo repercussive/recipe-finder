@@ -10,5 +10,5 @@ To run this application in your local development environment:
 3. Navigate to the root of the project in your terminal.
 4. Run the `docker-compose up` command. 
 
-The front-end application will be available at `http://localhost:3000`.
+The front-end application will be available at `http://localhost:5000`.
 The back-end application will be available at `http://localhost:8080`.
