@@ -1,0 +1,28 @@
+services:
+  db:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=${DB_NAME}'
+      - 'POSTGRES_PASSWORD=${DB_PASSWORD}'
+      - 'POSTGRES_USER=${DB_USER}'
+    ports:
+      - '5432'
+  backend:
+    build: ./backend
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      - 'SPRING_PROFILES_ACTIVE=${SPRING_PROFILE}'
+      - 'DB_NAME=${DB_NAME}'
+      - 'DB_USER=${DB_USER}'
+      - 'DB_PASSWORD=${DB_PASSWORD}'
+  frontend:
+    build: ./frontend
+    ports:
+      - '5000:5000'
+    depends_on:
+      - backend
+    environment:
+      - 'VITE_BACKEND_API_BASE_URL=http://localhost:8080'
